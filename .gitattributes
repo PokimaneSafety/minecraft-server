@@ -1,0 +1,7 @@
+* text=auto
+*.json eol=lf linguist-language=jsonc
+*.md eol=lf
+*.yml eol=lf
+*.yaml eol=lf
+*.tf eol=lf
+*.hcl eol=lf
