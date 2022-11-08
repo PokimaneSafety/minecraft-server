@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-export $(grep -v '^#' .env | xargs -d '\n')
+test -f .env && export $(grep -v '^#' .env | xargs -d '\n')
 command "$@"
