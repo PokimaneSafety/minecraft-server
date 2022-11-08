@@ -1,0 +1,33 @@
+{
+    "files.trimTrailingWhitespace": false,
+    "files.eol": "\n",
+    "files.exclude": {
+        "**/.git": true,
+        "**/.DS_Store": true,
+        "**/.terraform": true
+    },
+    "files.associations": {
+        "*.tf": "terraform",
+        "*.tfvars": "terraform",
+        "*.tfstate": "json"
+    },
+
+    "cSpell.enabled": false,
+
+    "[terraform]": {
+        "editor.defaultFormatter": "hashicorp.terraform",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.formatAll.terraform": true
+        }
+    },
+    "[terraform-vars]": {
+        "editor.defaultFormatter": "hashicorp.terraform",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.formatAll.terraform": true
+        }
+    },
+    "terraform.experimentalFeatures.validateOnSave": true,
+    "terraform.experimentalFeatures.prefillRequiredFields": true
+}
