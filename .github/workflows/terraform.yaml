@@ -1,0 +1,136 @@
+name: terraform
+on:
+    push:
+        branches:
+            - main
+        paths:
+            - '**/*.tf'
+            - '.github/workflows/terraform.yaml'
+    pull_request:
+        paths:
+            - '**/*.tf'
+            - '.github/workflows/terraform.yaml'
+jobs:
+    apply:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Clone Repository
+              uses: actions/checkout@master
+
+            - name: Install Terraform
+              uses: hashicorp/setup-terraform@v2
+              with:
+                  terraform_version: 1.2.7
+
+            - name: Format
+              id: fmt
+              run: terraform fmt -check -no-color
+              continue-on-error: true
+
+            - name: Initialise
+              id: init
+              run: terraform init -no-color
+              env:
+                  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  AWS_REGION: ${{ secrets.AWS_REGION }}
+
+            - name: Validate
+              id: validate
+              run: terraform validate -no-color
+
+            - name: Lint
+              uses: reviewdog/action-tflint@v1.16.0
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  reporter: github-pr-review
+                  fail_on_error: true
+                  flags: --module
+                  tflint_init: true
+                  tflint_version: v0.37.0
+              env:
+                  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  AWS_REGION: ${{ secrets.AWS_REGION }}
+
+            - name: Plan
+              id: plan
+              run: terraform plan -lock-timeout=30m -no-color
+              continue-on-error: true
+              env:
+                  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  AWS_REGION: ${{ secrets.AWS_REGION }}
+                  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+            - name: Apply
+              if: github.ref == 'refs/heads/main'
+              run: terraform apply -lock-timeout=30m -input=false -auto-approve -no-color
+              env:
+                  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  AWS_REGION: ${{ secrets.AWS_REGION }}
+                  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+            - uses: actions/github-script@v6
+              if: github.event_name == 'pull_request'
+              with:
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
+                  script: |
+                      // 1. Retrieve existing bot comments for the PR
+                      const { data: comments } = await github.rest.issues.listComments({
+                          owner: context.repo.owner,
+                          repo: context.repo.repo,
+                          issue_number: context.issue.number,
+                      })
+                      const botComment = comments.find(comment => {
+                          return comment.user.type === 'Bot' && comment.body.includes('Terraform Format and Style')
+                      })
+
+                      // 2. Prepare format of the comment
+                      const output = `
+
+                      #### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+
+                      #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+                      <details>
+
+                      \`\`\`\n
+                      ${{ steps.init.outputs.stdout }}\`\`\`
+
+                      </details>
+
+                      #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
+                      <details>
+
+                      \`\`\`terraform\n
+                      ${{ steps.validate.outputs.stdout }}\`\`\`
+
+                      </details>
+
+                      #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+                      <details>
+
+                      \`\`\`terraform\n
+                      ${{ steps.plan.outputs.stdout }}\n${{ steps.plan.outputs.stderr }}\`\`\`
+
+                      </details>
+
+                      *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Workflow: \`${{ github.workflow }}\`*`;
+
+                      // 3. If we have a comment, update it, otherwise create a new one
+                      if (botComment) {
+                          github.rest.issues.updateComment({
+                              owner: context.repo.owner,
+                              repo: context.repo.repo,
+                              comment_id: botComment.id,
+                              body: output
+                          })
+                      } else {
+                          github.rest.issues.createComment({
+                              issue_number: context.issue.number,
+                              owner: context.repo.owner,
+                              repo: context.repo.repo,
+                              body: output
+                          })
+                      }
