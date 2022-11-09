@@ -54,6 +54,23 @@ services:
             timeout: 1s
             retries: 30
 
+    deployerd:
+        build: .
+        container_name: deployerd
+        restart: unless-stopped
+        healthcheck:
+            test: 'curl --fail http://localhost:8080/healthz || exit 1'
+            start_period: 0s
+            interval: 3s
+            timeout: 1s
+            retries: 3
+        ports:
+            - '8080:8080'
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+            - ./docker-compose.yaml:/app/docker-compose.yaml
+            - ./nginx.conf:/app/nginx.conf
+
     vanilla:
         image: itzg/minecraft-server:java17-alpine
         container_name: vanilla
