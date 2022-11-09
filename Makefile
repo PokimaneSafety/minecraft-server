@@ -46,4 +46,4 @@ run:
 
 .PHONY: run-docker
 run-docker:
-	@docker run -it --rm deployerd:latest
+	@docker run -e DEPLOYD_SECRET=foo -it --rm deployerd:latest

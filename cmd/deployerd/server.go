@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func NewServer(deployer Deployer, host, port string) *http.Server {
+func NewServer(deployer Deployer, secret, host, port string) *http.Server {
 	handler := http.NewServeMux()
 	handler.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodGet {
@@ -18,6 +18,10 @@ func NewServer(deployer Deployer, host, port string) *http.Server {
 	})
 	handler.HandleFunc("/deploy", logHttp(func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodPost {
+			return
+		}
+		if r.Header.Get("authorization") != "Bearer "+secret {
+			w.WriteHeader(http.StatusUnauthorized)
 			return
 		}
 
