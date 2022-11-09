@@ -38,7 +38,7 @@ build:
 
 .PHONY: build-docker
 build-docker:
-	@docker compose build deployerd
+	@docker build -t deployerd .
 
 .PHONY: run
 run:
@@ -46,4 +46,4 @@ run:
 
 .PHONY: run-docker
 run-docker:
-	@docker compose up deployerd
+	@docker run -it --rm deployerd:latest

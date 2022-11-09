@@ -50,13 +50,14 @@ services:
         volumes:
             - ./tiles:/var/lib/mysql
         healthcheck:
-            test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+            test: 'mysqladmin ping -h localhost'
+            start_period: 0s
+            interval: 3s
             timeout: 1s
-            retries: 30
+            retries: 3
 
     deployerd:
         image: ghcr.io/pokimanesafety/minecraft-server/deployd:main
-        build: .
         container_name: deployerd
         restart: unless-stopped
         healthcheck:
