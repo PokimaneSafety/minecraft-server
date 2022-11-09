@@ -4,6 +4,7 @@ import (
 	"log"
 	"os/exec"
 	"sync"
+	"time"
 )
 
 type Deployer interface {
@@ -20,7 +21,10 @@ func NewDeployer() Deployer {
 
 func (d *deployerImpl) Deploy() error {
 	d.downloadResources()
-	d.restartCompose()
+	go func() {
+		time.Sleep(3 * time.Second)
+		d.restartCompose()
+	}()
 	return nil
 }
 
