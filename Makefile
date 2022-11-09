@@ -15,3 +15,11 @@ apply:
 lint:
 	@./scripts/with-env.sh tflint --init
 	@./scripts/with-env.sh tflint --module --loglevel=info
+
+.PHONY: connect
+connect:
+	@ssh root@46.4.75.47
+
+.PHONY: install
+install:
+	@cat install.sh | ssh root@46.4.75.47
