@@ -14,7 +14,8 @@ apply:
 .PHONY: lint
 lint:
 	@./scripts/with-env.sh tflint --init
-	@./scripts/with-env.sh tflint --module --loglevel=info
+	export TFLINT_LOG=INFO
+	@./scripts/with-env.sh tflint --module
 
 .PHONY: connect
 connect:
