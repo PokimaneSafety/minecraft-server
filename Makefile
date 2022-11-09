@@ -23,3 +23,11 @@ connect:
 .PHONY: install
 install:
 	@cat install.sh | ssh root@46.4.75.47
+
+.PHONY: update-plugins
+update-plugins:
+	@cat vanilla/update-plugins.sh | ssh root@46.4.75.47
+
+.PHONY: logs
+logs:
+	@ssh root@46.4.75.47 "docker compose logs --follow --no-log-prefix --since 24h vanilla | grep --invert-match --line-buffered 'Full render of map'"
