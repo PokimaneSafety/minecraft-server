@@ -70,14 +70,13 @@ services:
             MAX_PLAYERS: '50'
             DIFFICULTY: 'hard'
             # Plugins
-            SPIGET_RESOURCES: '274,1331,8631,18494,34315,81254,81297,82342,90766'
+            SPIGET_RESOURCES: '274,1331,8631,18494,34315,81254,82342,90766'
             # 274   Dynmap            https://www.spigotmc.org/resources/dynmap.274/
             # 1331  SuperVanish       https://www.spigotmc.org/resources/supervanish-be-invisible.1331/
             # 8631  CoreProtect       https://www.spigotmc.org/resources/coreprotect.8631/
             # 18494 DiscordSRV        https://www.spigotmc.org/resources/discordsrv.18494/
             # 34315 Vault             https://www.spigotmc.org/resources/vault.34315/
             # 81254 MiniMOTD          https://www.spigotmc.org/resources/minimotd-server-list-motd-plugin-with-rgb-gradients.81254/
-            # 81297 Geyser            https://www.spigotmc.org/resources/geyser-minecraft-bedrock-protocol-support.81297/
             # 82342 InvSee++          https://www.spigotmc.org/resources/invsee.82342/
             # 90766 Themis Anti Cheat https://www.spigotmc.org/resources/themis-anti-cheat-1-17-x-bedrock-support-paper-tuinity-compatibility-free-optimized.90766/
         volumes:
