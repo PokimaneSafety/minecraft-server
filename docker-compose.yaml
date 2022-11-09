@@ -51,23 +51,24 @@ services:
             - '19132:19132/udp'
         environment:
             EULA: 'TRUE'
+            # Sever Information
             TYPE: 'PAPER'
             VERSION: '1.19.2'
             PAPERBUILD: '263'
+            # System
             ENABLE_ROLLING_LOGS: 'TRUE'
-            USE_AIKAR_FLAGS: 'TRUE'
             TZ: 'Europe/London'
-            #ENABLE_AUTOPAUSE: "TRUE"
-            OVERRIDE_SERVER_PROPERTIES: 'TRUE'
+            # Performance
+            USE_AIKAR_FLAGS: 'TRUE'
             MAX_TICK_TIME: '-1'
-            ENABLE_QUERY: 'true'
+            MEMORY: '16G'
+            # Server Properties
+            OVERRIDE_SERVER_PROPERTIES: 'TRUE'
+            ENABLE_WHITELIST: 'TRUE'
+            ENFORCE_WHITELIST: 'TRUE'
+            ENABLE_QUERY: 'TRUE'
             MAX_PLAYERS: '50'
             DIFFICULTY: 'hard'
-            OPS: 'robinlemon'
-            MEMORY: '16G'
-            ENABLE_WHITELIST: 'true'
-            ENFORCE_WHITELIST: 'TRUE'
-            STOP_DURATION: '60'
 
             # 1) FastChunkPreGenerator
             #    Source: https://www.spigotmc.org/resources/fast-chunk-pregenerator.74429/
