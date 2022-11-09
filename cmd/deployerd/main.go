@@ -14,8 +14,13 @@ func main() {
 	host := ""
 	port := "8080"
 
+	secret, ok := os.LookupEnv("DEPLOYD_SECRET")
+	if !ok {
+		log.Fatalln("no deployer secret configured")
+	}
+
 	dpl := NewDeployer()
-	srv := NewServer(dpl, host, port)
+	srv := NewServer(dpl, secret, host, port)
 
 	go func() {
 		log.Printf("Listening at %s:%s\n", host, port)
