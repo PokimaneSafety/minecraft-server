@@ -81,6 +81,6 @@ jobs:
 
             - name: Rollout Deploy
               run: |
-                  curl -X POST -H "Authorization: Bearer $DEPLOYD_SECRET" http://46.4.75.47/deploy
+                  curl -X POST -H "Authorization: Bearer $DEPLOYD_SECRET" https://mcdeploy.pokimane.dev/deploy
               env:
                   DEPLOYD_SECRET: ${{ secrets.DEPLOYD_SECRET }}

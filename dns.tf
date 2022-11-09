@@ -14,6 +14,14 @@ resource "cloudflare_record" "status" {
   proxied = true # Take advantage of Cloudflare http caching
 }
 
+resource "cloudflare_record" "deployd" {
+  zone_id = data.cloudflare_zone.zone.zone_id
+  name    = "mcdeploy"
+  type    = "A"
+  value   = "46.4.75.47"
+  proxied = true
+}
+
 resource "cloudflare_record" "minecraft" {
   zone_id = data.cloudflare_zone.zone.zone_id
   name    = "minecraft"
