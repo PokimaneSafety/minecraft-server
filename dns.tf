@@ -11,5 +11,5 @@ resource "cloudflare_record" "minecraft" {
   name    = "minecraft"
   type    = "A"
   value   = "3.231.247.106"
-  proxied = false # The game server needs to be able to resolve the IP address.
+  proxied = false # The game client needs to be able to resolve the IP address.
 }
