@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.9'
 
 volumes:
     netdatalib:
@@ -38,6 +38,21 @@ services:
         environment:
             DOCKER_USR: 'root'
             DOCKER_GRP: 'root'
+
+    dynmap-tiles:
+        image: mariadb:10.9-jammy
+        container_name: dynmap-tiles
+        hostname: dynmap-tiles
+        restart: unless-stopped
+        environment:
+            MARIADB_ROOT_PASSWORD: root
+            MARIADB_DATABASE: vanilla
+        volumes:
+            - ./tiles:/var/lib/mysql
+        healthcheck:
+            test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+            timeout: 1s
+            retries: 30
 
     vanilla:
         image: itzg/minecraft-server:java17-alpine
@@ -81,3 +96,6 @@ services:
             # 90766 Themis Anti Cheat https://www.spigotmc.org/resources/themis-anti-cheat-1-17-x-bedrock-support-paper-tuinity-compatibility-free-optimized.90766/
         volumes:
             - ./vanilla:/data
+        depends_on:
+            dynmap-tiles:
+                condition: service_healthy
