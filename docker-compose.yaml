@@ -73,6 +73,7 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock:ro
             - ./docker-compose.yaml:/app/docker-compose.yaml
             - ./nginx.conf:/app/nginx.conf
+            - ./env:/app/.env:ro
 
     vanilla:
         image: itzg/minecraft-server:java17-alpine
