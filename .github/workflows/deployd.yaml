@@ -78,9 +78,3 @@ jobs:
                   push: true
                   tags: ${{ steps.meta.outputs.tags }}
                   labels: ${{ steps.meta.outputs.labels }}
-
-            - name: Rollout Deploy
-              run: |
-                  curl -X POST -H "Authorization: Bearer $DEPLOYD_SECRET" https://mcdeploy.pokimane.dev/deploy
-              env:
-                  DEPLOYD_SECRET: ${{ secrets.DEPLOYD_SECRET }}

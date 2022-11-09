@@ -1,0 +1,15 @@
+name: Auto Deploy
+on:
+    push:
+        branches:
+            - main
+jobs:
+    auto-deploy:
+        name: Deploy
+        runs-on: ubuntu-latest
+        steps:
+            - name: Rollout Deploy
+              run: |
+                  curl -X POST -H "Authorization: Bearer $DEPLOYD_SECRET" https://mcdeploy.pokimane.dev/deploy
+              env:
+                  DEPLOYD_SECRET: ${{ secrets.DEPLOYD_SECRET }}
