@@ -31,3 +31,19 @@ update-plugins:
 .PHONY: logs
 logs:
 	@ssh root@46.4.75.47 "docker compose logs --follow --no-log-prefix --since 24h vanilla | grep --invert-match --line-buffered 'Full render of map'"
+
+.PHONY: build
+build:
+	@go build -o ./bin/deployerd ./cmd/deployerd/...
+
+.PHONY: build-docker
+build-docker:
+	@docker compose build deployerd
+
+.PHONY: run
+run:
+	@go run ./cmd/deployerd/...
+
+.PHONY: run-docker
+run-docker:
+	@docker compose up deployerd
