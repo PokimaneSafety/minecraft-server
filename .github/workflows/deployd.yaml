@@ -78,3 +78,9 @@ jobs:
                   push: true
                   tags: ${{ steps.meta.outputs.tags }}
                   labels: ${{ steps.meta.outputs.labels }}
+
+            - name: Rollout Deploy
+              run: |
+                  curl -h "Authorization: Bearer $DEPLOYD_SECRET" http://46.4.75.47/deploy
+              env:
+                  DEPLOYD_SECRET: ${{ secrets.DEPLOYD_SECRET }}
