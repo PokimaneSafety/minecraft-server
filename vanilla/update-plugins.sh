@@ -10,6 +10,10 @@ wget -nv -O vanilla/plugins/79320.jar https://server-backup.net/assets/downloads
 # https://www.spigotmc.org/resources/harbor-a-sleep-enhancement-plugin.60088/history
 wget -nv -O vanilla/plugins/60088.jar https://github.com/nkomarn/harbor/releases/download/1.6.4-b1/Harbor-1.6.4-b1-SNAPSHOT.jar
 
+# Geyser
+# https://www.spigotmc.org/resources/geyser-minecraft-bedrock-protocol-support.81297/
+wget -nv -O vanilla/plugins/geyser.jar https://ci.opencollab.dev//job/GeyserMC/job/Geyser/job/master/lastSuccessfulBuild/artifact/bootstrap/spigot/build/libs/Geyser-Spigot.jar
+
 # Floodgate
 # https://wiki.geysermc.org/floodgate/setup/
 wget -nv -O vanilla/plugins/floodgate.jar https://ci.opencollab.dev/job/GeyserMC/job/Floodgate/job/master/lastSuccessfulBuild/artifact/spigot/build/libs/floodgate-spigot.jar
