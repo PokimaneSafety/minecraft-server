@@ -1,3 +1,8 @@
 {
-    "recommendations": ["editorconfig.editorconfig", "hashicorp.terraform"]
+    "recommendations": [
+        "editorconfig.editorconfig",
+        "hashicorp.terraform",
+        "william-voyek.vscode-nginx",
+        "ms-azuretools.vscode-docker"
+    ]
 }
