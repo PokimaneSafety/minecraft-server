@@ -69,45 +69,16 @@ services:
             ENABLE_QUERY: 'TRUE'
             MAX_PLAYERS: '50'
             DIFFICULTY: 'hard'
-
-            # 1) FastChunkPreGenerator
-            #    Source: https://www.spigotmc.org/resources/fast-chunk-pregenerator.74429/
-            #
-            # M 2) ProtocolLib (Dependency of AdvancedNMOTD)
-            # M    https://www.spigotmc.org/resources/protocollib.1997/
-            #
-            # 3) Themis Anti Cheat | 1.17.X | Bedrock Support | Paper, Tuinity Compatibility | Free, Optimized
-            #    https://www.spigotmc.org/resources/themis-anti-cheat-1-17-x-bedrock-support-paper-tuinity-compatibility-free-optimized.90766/
-            #
-            # 4) DiscordSRV
-            #    https://www.spigotmc.org/resources/discordsrv.18494/
-            #
-            # 5) Dynmap
-            #    https://www.spigotmc.org/resources/dynmap.274/
-            #
-            # M 6) World / Server Backup
-            # M    https://www.spigotmc.org/resources/world-server-backup-1-8-1-18-x-multithreaded.79320/
-            #
-            # M 7) Geyser | Minecraft: Bedrock Protocol Support
-            # M   https://www.spigotmc.org/resources/geyser-minecraft-bedrock-protocol-support.81297/
-            #
-            # S 8) EssentialsX
-            # S   https://www.spigotmc.org/resources/essentialsx.9089/
-            #
-            # S 9) LuckPerms - A permissions plugin for Minecraft servers (Bukkit/Spigot, BungeeCord & more).
-            # S   https://www.spigotmc.org/resources/luckperms.28140/
-            #
-            # 10) Vault - Vault is a Permissions, Chat, & Economy API to give plugins easy hooks into these systems.
-            #     https://www.spigotmc.org/resources/vault.34315/
-            #
-            # 11) SuperVanish >> Be invisible - Advanced /vanish plugin which makes other players think that you're not on the server.
-            #     https://www.spigotmc.org/resources/supervanish-be-invisible.1331/
-            #
-            # 12) CoreProtect - Fast, efficient block logging, rollbacks, and restores
-            #     https://www.spigotmc.org/resources/coreprotect.8631/
-            #
-            # 13) MiniMOTD - A MOTD plugin using MiniMessage for formatting (supports RGB Hex, Gradients, and more!)
-            #     https://www.spigotmc.org/resources/minimotd-server-list-motd-plugin-with-rgb-gradients.81254/
-            SPIGET_RESOURCES: '74429,90766,18494,34315,1331,8631,81254'
+            # Plugins
+            SPIGET_RESOURCES: '274,1331,8631,18494,34315,81254,81297,82342,90766'
+            # 274   Dynmap            https://www.spigotmc.org/resources/dynmap.274/
+            # 1331  SuperVanish       https://www.spigotmc.org/resources/supervanish-be-invisible.1331/
+            # 8631  CoreProtect       https://www.spigotmc.org/resources/coreprotect.8631/
+            # 18494 DiscordSRV        https://www.spigotmc.org/resources/discordsrv.18494/
+            # 34315 Vault             https://www.spigotmc.org/resources/vault.34315/
+            # 81254 MiniMOTD          https://www.spigotmc.org/resources/minimotd-server-list-motd-plugin-with-rgb-gradients.81254/
+            # 81297 Geyser            https://www.spigotmc.org/resources/geyser-minecraft-bedrock-protocol-support.81297/
+            # 82342 InvSee++          https://www.spigotmc.org/resources/invsee.82342/
+            # 90766 Themis Anti Cheat https://www.spigotmc.org/resources/themis-anti-cheat-1-17-x-bedrock-support-paper-tuinity-compatibility-free-optimized.90766/
         volumes:
             - ./vanilla:/data
