@@ -55,6 +55,7 @@ services:
             retries: 30
 
     deployerd:
+        image: ghcr.io/pokimanesafety/minecraft-server/deployd:main
         build: .
         container_name: deployerd
         restart: unless-stopped
