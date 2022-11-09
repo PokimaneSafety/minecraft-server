@@ -81,6 +81,6 @@ jobs:
 
             - name: Rollout Deploy
               run: |
-                  curl -h "Authorization: Bearer $DEPLOYD_SECRET" http://46.4.75.47/deploy
+                  curl -X POST -H "Authorization: Bearer $DEPLOYD_SECRET" http://46.4.75.47/deploy
               env:
                   DEPLOYD_SECRET: ${{ secrets.DEPLOYD_SECRET }}
