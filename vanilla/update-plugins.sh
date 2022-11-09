@@ -17,3 +17,9 @@ wget -nv -O vanilla/plugins/geyser.jar https://ci.opencollab.dev//job/GeyserMC/j
 # Floodgate
 # https://wiki.geysermc.org/floodgate/setup/
 wget -nv -O vanilla/plugins/floodgate.jar https://ci.opencollab.dev/job/GeyserMC/job/Floodgate/job/master/lastSuccessfulBuild/artifact/spigot/build/libs/floodgate-spigot.jar
+
+# Dynmap View
+# https://www.spigotmc.org/liveatlas-alternative-map-ui-dynmap-squaremap-pl3xmap-overviewer.86939
+wget -nv -O vanilla/plugins/dynmap/web/live-atlas.zip https://github.com/JLyne/LiveAtlas/releases/download/v3.1.0/live-atlas-3.1.0.zip
+unzip -uv vanilla/plugins/dynmap/web/live-atlas.zip -d vanilla/plugins/dynmap/web/
+rm vanilla/plugins/dynmap/web/live-atlas.zip
